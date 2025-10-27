@@ -16,17 +16,11 @@
 
   cw1.addEventListener("click", async function () {
     try {
-      answer.textContent = "Loading..."
+      answer.textContent = "Processing..."
 
-      const post = await fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json());
-      const title = document.createElement('h3');
-      const body = document.createElement('span');
-      title.textContent = post.title;
-      body.textContent = post.body;
+      const post = await (await fetch('https://jsonplaceholder.typicode.com/posts', { headers: { "Content-Type": "application/json" }, method: "POST", body: JSON.stringify({ title: "...", body: "...", userId: 1 }) })).json();
 
-      answer.innerHTML = "";
-      answer.appendChild(title);
-      answer.appendChild(body);
+      answer.innerHTML = `Dodano nowy post o ID = ${post.id}`;
     }
     catch (e) {
       answer.innerText = 'Error loading posts.';
