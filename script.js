@@ -19,6 +19,10 @@
       answer.textContent = "Loading..."
 
       const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json());
+      console.log(posts);
+
+      console.log(posts[5].userId)
+
       const list = posts.map(post => {
         const li = document.createElement('li');
         li.classList.add('post');
