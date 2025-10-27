@@ -21,6 +21,7 @@
       const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json());
       const list = posts.map(post => {
         const li = document.createElement('li');
+        li.classList.add('post');
 
         const title = document.createElement('h3');
         const body = document.createElement('span');
@@ -40,7 +41,10 @@
       answer.innerHTML = "";
       answer.appendChild(ul);
     }
-    catch (e) { answer.innerText = 'Error loading posts.'; }
+    catch (e) {
+      answer.innerText = 'Error loading posts.';
+      console.error(e);
+    }
   })
 
   cw2.addEventListener("click", function () {
