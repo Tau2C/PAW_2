@@ -18,29 +18,20 @@
     try {
       answer.textContent = "Loading..."
 
-      const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json());
-      const list = posts.map(post => {
-        const li = document.createElement('li');
-
-        const title = document.createElement('h3');
-        const body = document.createElement('span');
-        title.textContent = post.title;
-        body.textContent = post.body;
-
-        li.appendChild(title);
-        li.appendChild(body);
-        return li;
-      });
-
-      const ul = document.createElement('ul');
-      list.forEach(li => {
-        ul.appendChild(li);
-      });
+      const post = await fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json());
+      const title = document.createElement('h3');
+      const body = document.createElement('span');
+      title.textContent = post.title;
+      body.textContent = post.body;
 
       answer.innerHTML = "";
-      answer.appendChild(ul);
+      answer.appendChild(title);
+      answer.appendChild(body);
     }
-    catch (e) { answer.innerText = 'Error loading posts.'; }
+    catch (e) {
+      answer.innerText = 'Error loading posts.';
+      console.error(e);
+    }
   })
 
   cw2.addEventListener("click", function () {
