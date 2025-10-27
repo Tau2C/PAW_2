@@ -16,7 +16,13 @@
 
   cw1.addEventListener("click", async function () {
     try {
-      answer.textContent = "Loading..."
+      const popup = document.createElement('div');
+      popup.classList.add('popup');
+      const text = document.createElement('span');
+      text.textContent = "Loading...";
+      popup.appendChild(text);
+
+      document.body.appendChild(popup);
 
       const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json());
       console.log(posts);
@@ -44,6 +50,7 @@
 
       answer.innerHTML = "";
       answer.appendChild(ul);
+      popup.remove();
     }
     catch (e) {
       answer.innerText = 'Error loading posts.';
